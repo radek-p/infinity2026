@@ -119,11 +119,6 @@ pagination.pagerSize = 5
           url = "/#register"
           weight = 130
         [[languages.en.menu.main]]
-          identifier = "organisation"
-          name = "Organisation"
-          url = "/#organisation"
-          weight = 150
-        [[languages.en.menu.main]]
           identifier = "local-info"
           name = "Local info"
           url = "/#local-info"
@@ -133,6 +128,11 @@ pagination.pagerSize = 5
           name = "Links"
           url = "/#related"
           weight = 190
+        [[languages.en.menu.main]]
+          identifier = "organisation"
+          name = "Organisation"
+          url = "/#organisation"
+          weight = 200
 
 #[module]
   # In case you would like to make changes to the theme and keep it locally in you repository,
