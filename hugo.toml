@@ -2,6 +2,7 @@ baseURL = 'https://infinity2026.pages.dev'
 locale = 'en-gb'
 title = 'Infinity 2026'
 theme = 'terminal'
+copyright = "Infinity 2026 :: University of London"
 pagination.pagerSize = 5
 
 # Required for Chroma and the custom syntax highlighting.
@@ -14,7 +15,7 @@ pagination.pagerSize = 5
   contentTypeName = "posts"
 
   # if you set this to 0, only submenu trigger will be visible
-  showMenuItems = 2
+  showMenuItems = 10
 
   # show selector to switch language
   showLanguageSelector = false
@@ -33,6 +34,9 @@ pagination.pagerSize = 5
   # set post to show the last updated
   # If you use git, you can set `enableGitInfo` to `true` and then post will automatically get the last updated
   showLastUpdated = false
+
+  # Enable math support
+  math = true
 
   # Provide a string as a prefix for the last update date. By default, it looks like this: 2020-xx-xx [Updated: 2020-xx-xx] :: Author
   # updatedDatePrefix = "Updated"
@@ -63,6 +67,15 @@ pagination.pagerSize = 5
   # dateFormat = "2006-01-02 3:04:06 PM MST"
 
 
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [['\[', '\]'], ['$$', '$$']]
+          inline = [['\(', '\)']]
+
 [params.twitter]
   # set Twitter handles for Twitter cards
   # see https://developer.twitter.com/en/docs/tweets/optimize-with-cards/guides/getting-started#card-and-content-attribution
@@ -74,12 +87,12 @@ pagination.pagerSize = 5
   [languages.en]
     languageName = "English"
     title = "Infinity 2026"
+    copyright = "Infinity 2026"
 
     [languages.en.params]
       subtitle = "A simple, retro theme for Hugo"
       owner = ""
       keywords = ""
-      copyright = ""
       menuMore = "Show more"
       readMore = "Read more"
       readOtherPosts = "Read other posts"
@@ -96,13 +109,30 @@ pagination.pagerSize = 5
 
       [languages.en.menu]
         [[languages.en.menu.main]]
-          identifier = "about"
-          name = "About"
-          url = "/about"
+          identifier = "programme"
+          name = "Programme"
+          url = "/#programme"
+          weight = 120
         [[languages.en.menu.main]]
-          identifier = "showcase"
-          name = "Showcase"
-          url = "/showcase"
+          identifier = "register"
+          name = "Register"
+          url = "/#register"
+          weight = 130
+        [[languages.en.menu.main]]
+          identifier = "organisation"
+          name = "Organisation"
+          url = "/#organisation"
+          weight = 150
+        [[languages.en.menu.main]]
+          identifier = "local-info"
+          name = "Local info"
+          url = "/#local-info"
+          weight = 160
+        [[languages.en.menu.main]]
+          identifier = "related"
+          name = "Links"
+          url = "/#related"
+          weight = 190
 
 #[module]
   # In case you would like to make changes to the theme and keep it locally in you repository,

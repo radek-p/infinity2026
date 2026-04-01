@@ -1,8 +1,18 @@
 {{ define "main" }}
-{{ range .Site.GetPage "section" "sections" .Pages }}
-<section id="{{ .File.BaseFileName }}">
-    <h2>{{ .Title }}</h2>
-    {{ .Content }}
-</section>
-{{ end }}
+  {{ .Content }}
+
+  {{ $sections := site.GetPage "section" "sections" }}
+
+  {{ if $sections }}
+    {{ range (where $sections.Pages "Draft" false).ByWeight }}
+      <section id="{{ replaceRE "^[0-9]+-" "" .File.BaseFileName }}">
+        {{ if not .Params.hideHeading }}
+          <h2>{{ .Title }}</h2>
+        {{ end }}
+        {{ .Content }}
+      </section>
+    {{ end }}
+  {{ else }}
+    <p>No sections found. Add pages under <code>content/sections/</code>.</p>
+  {{ end }}
 {{ end }}
