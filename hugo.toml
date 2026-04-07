@@ -2,7 +2,7 @@ baseURL = 'https://infinity2026.pages.dev'
 locale = 'en-gb'
 title = 'Infinity 2026'
 theme = 'terminal'
-copyright = "Infinity 2026 :: University of London"
+copyright = "Infinity 2026"
 pagination.pagerSize = 5
 
 # Required for Chroma and the custom syntax highlighting.
@@ -90,7 +90,7 @@ pagination.pagerSize = 5
     copyright = "Infinity 2026"
 
     [languages.en.params]
-      subtitle = "A simple, retro theme for Hugo"
+      subtitle = "24th International Workshop on Verification of Infinite-State Systems"
       owner = ""
       keywords = ""
       menuMore = "Show more"
