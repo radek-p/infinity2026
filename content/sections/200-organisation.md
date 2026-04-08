@@ -3,10 +3,10 @@ title: "Organisation"
 weight: 200
 ---
 
-**INFINITY 2026** is organised by:
+INFINITY 2026 is organised by:
 
-- **Dmitry Chistikov**, University of Warwick
-- **Karol Węgrzycki**, Max Planck Institute for Informatics
+- [Dmitry Chistikov](https://warwick.ac.uk/fac/sci/dcs/people/dmitry_chistikov/), University of Warwick
+- [Karol Węgrzycki](https://www.mpi-inf.mpg.de/departments/algorithms-complexity/people/current-members/karol-wegrzycki), Max Planck Institute for Informatics
 - **Radek Piórkowski**, University of Warwick
 
 For questions about the workshop, please contact the organisers by email.
