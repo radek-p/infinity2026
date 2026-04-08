@@ -3,7 +3,5 @@ title: "Register"
 weight: 130
 ---
 
-Registration details will be announced here; please check back for the registration link and deadlines.
-
-There is no registration fee. Registration is required for attendance.
+Registration is required for attendance and is handled via the main [ICALP](https://icalppodcspaa2026.cs.rhul.ac.uk) registration system (to open soon).
 

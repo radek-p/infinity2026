@@ -110,7 +110,7 @@ pagination.pagerSize = 5
       [languages.en.menu]
         [[languages.en.menu.main]]
           identifier = "programme"
-          name = "Programme"
+          name = "Invited speakers"
           url = "/#programme"
           weight = 120
         [[languages.en.menu.main]]

@@ -1,9 +1,6 @@
 ---
-title: "Programme"
+title: "Invited speakers"
 weight: 120
 ---
 
-TBA
-
-## Invited speakers
 TBA
