@@ -1,8 +1,8 @@
 baseURL = 'https://infinity2026.pages.dev'
 locale = 'en-gb'
-title = 'Infinity 2026'
+title = 'INFINITY 2026'
 theme = 'terminal'
-copyright = "Infinity 2026"
+copyright = "INFINITY 2026"
 pagination.pagerSize = 5
 
 # Required for Chroma and the custom syntax highlighting.
@@ -86,8 +86,8 @@ pagination.pagerSize = 5
 [languages]
   [languages.en]
     languageName = "English"
-    title = "Infinity 2026"
-    copyright = "Infinity 2026"
+    title = "INFINITY 2026"
+    copyright = "INFINITY 2026"
 
     [languages.en.params]
       subtitle = "24th International Workshop on Verification of Infinite-State Systems"
@@ -104,7 +104,7 @@ pagination.pagerSize = 5
       words = "words"
 
       [languages.en.params.logo]
-        logoText = "Infinity 2026"
+        logoText = "INFINITY 2026"
         logoHomeLink = "/"
 
       [languages.en.menu]
