@@ -3,7 +3,7 @@ title: "About"
 weight: 100
 hideHeading: true
 ---
-**24th International Workshop on Verification of Infinite-State Systems**  
+# 24th International Workshop on Verification of Infinite-State Systems  
 
 - INFINITY 2026 is a 1-day satellite workshop of ICALP 2026
 - Royal Holloway, University of London (Egham, UK)

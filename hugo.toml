@@ -133,6 +133,11 @@ pagination.pagerSize = 5
           name = "Organisation"
           url = "/#organisation"
           weight = 200
+        [[languages.en.menu.main]]
+          identifier = "organisation"
+          name = "Past editions"
+          url = "/past-editions"
+          weight = 210
 
 #[module]
   # In case you would like to make changes to the theme and keep it locally in you repository,

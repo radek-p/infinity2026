@@ -1,6 +1,7 @@
 ---
 title: "Links"
 weight: 190
+draft: true
 ---
 
 - [Past edition - INFINITY 2023](https://infinity-2023.github.io/)

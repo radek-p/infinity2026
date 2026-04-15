@@ -1,0 +1,27 @@
+---
+title: "Past editions"
+---
+
+- [Infinity 2023](https://infinity-2023.github.io/), Antwerp, Belgium with CONCUR
+- [Infinity 2020](https://web.archive.org/web/20210816093437/https://infinity.mpi-sws.org/), Online with LICS and ICALP
+- [Infinity 2019](http://atva2019.iis.sinica.edu.tw/infinity2019/), Taipei, Taiwan with ATVA
+- [Infinity 2018](https://www.fi.muni.cz/usr/kucera/infinity18/), Prague, Czech Republic with ICALP
+- [Infinity 2017](https://web.archive.org/web/20190829201931/http://www.lsv.fr/~haase/infinity17/), Reykjavik, Iceland with LICS
+- [Infinity 2016](https://imsarchives.nus.edu.sg/oldwww/Programs/016auto/files/infinity.jpg), Singapore, Singapore with Automata, Logic and Games 2016
+- [Infinity 2015](http://user.it.uu.se/~aiscy966/Infinity2015/main.html), Bangalore, India with FSTTCS
+- [Infinity 2014](http://user.it.uu.se/~aiscy966/Infinity2014/main.html), New Delhi, India with FSTTCS
+- [Infinity 2013](http://www.fit.vutbr.cz/~holik/INFINITY13/), Hanoi, Vietnam with ATVA
+- [Infinity 2012](https://web.archive.org/web/20131023205046/http://www.it.uu.se/workshop/infinity2012/), Paris, France with FM
+- [Infinity 2011](http://web.archive.org/web/20120405013949/http://soslab.nccu.edu.tw:80/infinity11/), Taipei, Taiwan with ATVA
+- [Infinity 2010](https://web.archive.org/web/20111025152723/http://www.it.uu.se/workshop/infinity2010/), Singapore, Singapore with ATVA
+- [Infinity 2009](http://www.cs.toronto.edu/infinity2009), Bologna, Italy with CONCUR
+- Infinity 2008, Toronto, Canada with CONCUR
+- [Infinity 2007](http://web.archive.org/web/20080518082835/http://www.cs.uiuc.edu/infinity07/), Lisbon, Portugal with CONCUR
+- [Infinity 2006](http://web.archive.org/web/20070208100301/http://www.liafa.jussieu.fr:80/infinity06), Bonn, Germany with CONCUR
+- [Infinity 2005](http://web.archive.org/web/20070222080450/http://www.brics.dk:80/infinity05/), San Francisco, USA with CONCUR
+- [Infinity 2004](http://web.archive.org/web/20061201233627/http://homepages.inf.ed.ac.uk/jcb/Infinity04/), London, UK with CONCUR
+- [Infinity 2003](http://web.archive.org/web/20031203112534/http://www.lsv.ens-cachan.fr/infinity03/), Marseilles, France with CONCUR
+- [Infinity 2002](http://www.fi.muni.cz/infinity02/), Brno, Czech Republic with CONCUR
+- Infinity 1998, Aalborg, Denmark with ICALP
+- [Infinity 1997](http://web.archive.org/web/20021203050302/http://user.it.uu.se/~fm/infinity97cfp.html), Bologna, Italy with ICALP
+- Infinity 1996, Pisa, Italy with CONCUR
