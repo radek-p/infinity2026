@@ -8,4 +8,3 @@ weight: 120
 - [Andreas Pavlogiannis](https://cs.au.dk/~pavlogiannis/)
 - [Henry Sinclair-Banks](https://www.mimuw.edu.pl/~hsb/)
 - [Michael Wehar](http://www.michaelwehar.com)
-- ...
