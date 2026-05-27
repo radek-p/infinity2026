@@ -15,7 +15,7 @@ title: "Past editions"
 - [Infinity 2011](http://web.archive.org/web/20120405013949/http://soslab.nccu.edu.tw:80/infinity11/), Taipei, Taiwan with ATVA
 - [Infinity 2010](https://web.archive.org/web/20111025152723/http://www.it.uu.se/workshop/infinity2010/), Singapore, Singapore with ATVA
 - [Infinity 2009](http://www.cs.toronto.edu/infinity2009), Bologna, Italy with CONCUR
-- Infinity 2008, Toronto, Canada with CONCUR
+- [Infinity 2008](https://web.archive.org/web/20100920043119/https://www.fit.vutbr.cz/events/infinity08), Toronto, Canada with CONCUR
 - [Infinity 2007](http://web.archive.org/web/20080518082835/http://www.cs.uiuc.edu/infinity07/), Lisbon, Portugal with CONCUR
 - [Infinity 2006](http://web.archive.org/web/20070208100301/http://www.liafa.jussieu.fr:80/infinity06), Bonn, Germany with CONCUR
 - [Infinity 2005](http://web.archive.org/web/20070222080450/http://www.brics.dk:80/infinity05/), San Francisco, USA with CONCUR
