@@ -1,5 +1,5 @@
 ---
-title: "Confirmed speakers"
+title: "Invited speakers"
 weight: 120
 ---
 
