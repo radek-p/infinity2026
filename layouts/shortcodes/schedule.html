@@ -1,0 +1,93 @@
+{{- $path := .Get 0 | default "static/program.yaml" -}}
+{{- $data := transform.Unmarshal (readFile $path) -}}
+<div class="schedule">
+  {{- range $data -}}
+    {{- $isBreak := and (not .speaker) (not .items) (not .abstract) -}}
+    <div class="schedule__row{{ if $isBreak }} schedule__row--break{{ end }}">
+      <div class="schedule__time">{{ replace .time " to " "–" }}</div>
+      <div class="schedule__body">
+        {{- if .items -}}
+          <div class="schedule__title">{{ .title }}</div>
+          <ul class="schedule__items">
+            {{- range .items -}}
+              <li>
+                <div class="schedule__title">{{ .title }}</div>
+                {{- with .speaker }}<div class="schedule__speaker">{{ . }}</div>{{ end -}}
+                {{- with .abstract }}{{ if ne . "TBA" }}
+                  <details class="schedule__abstract"><summary>Abstract</summary>{{ partial "schedule-abstract.html" . }}</details>
+                {{- end }}{{ end -}}
+              </li>
+            {{- end -}}
+          </ul>
+        {{- else -}}
+          <div class="schedule__title">{{ .title }}</div>
+          {{- with .speaker }}<div class="schedule__speaker">{{ . }}</div>{{ end -}}
+          {{- with .abstract }}{{ if ne . "TBA" }}
+            <details class="schedule__abstract"><summary>Abstract</summary>{{ partial "schedule-abstract.html" . }}</details>
+          {{- end }}{{ end -}}
+        {{- end -}}
+      </div>
+    </div>
+  {{- end -}}
+</div>
+
+<style>
+.schedule {
+  margin-top: calc(var(--line-height) * 0.5);
+}
+.schedule__row {
+  display: flex;
+  gap: 1.5ch;
+  padding: 0.6em 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--foreground) 20%, transparent);
+}
+.schedule__row:last-child {
+  border-bottom: none;
+}
+.schedule__time {
+  flex: 0 0 11ch;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.schedule__body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.schedule__title {
+  font-weight: bold;
+}
+.schedule__row--break .schedule__title {
+  font-weight: normal;
+  opacity: 0.65;
+}
+.schedule__speaker {
+  opacity: 0.85;
+}
+.schedule__items {
+  list-style: disc;
+  margin: 0.3em 0 0;
+  padding-left: 1.4em;
+}
+.schedule__items > li {
+  margin: 0.6em 0;
+}
+.schedule__items > li::marker {
+  color: var(--accent);
+}
+.schedule__abstract {
+  margin-top: 0.3em;
+}
+.schedule__abstract > summary {
+  cursor: pointer;
+  color: var(--accent);
+  opacity: 0.8;
+  font-size: 0.9em;
+}
+.schedule__abstract-body {
+  margin-top: 0.4em;
+  opacity: 0.9;
+}
+.schedule__abstract-body > p {
+  margin: 0;
+}
+</style>

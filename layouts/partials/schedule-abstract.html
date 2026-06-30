@@ -1,0 +1,4 @@
+{{- /* Render an abstract as Markdown, so [text](url) links and bare URLs both
+       become clickable. Context (.) is the abstract string. markdownify strips
+       the outer <p>, so wrap it for styling. */ -}}
+<div class="schedule__abstract-body">{{ . | markdownify }}</div>

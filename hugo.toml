@@ -114,6 +114,11 @@ pagination.pagerSize = 5
           url = "/#programme"
           weight = 120
         [[languages.en.menu.main]]
+          identifier = "schedule"
+          name = "Programme"
+          url = "/#schedule"
+          weight = 125
+        [[languages.en.menu.main]]
           identifier = "register"
           name = "Register"
           url = "/#register"

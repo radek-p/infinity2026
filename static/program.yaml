@@ -1,0 +1,208 @@
+# INFINITY 2026 Workshop program
+
+- time: 09:05 to 09:10
+  title: Welcome
+
+- time: 09:10 to 09:55
+  title: Fine-Grained Complexity and Formal Languages
+  speaker: Henning Fernau
+  abstract: >-
+    In this talk, some basic ideas of fine-grained complexity are introduced.
+    This includes the presentation of key hypotheses like (S)ETH, OVH, APSP and
+    3SUM. In the second part of the talk, we will explain how to base conclusions
+    on these hypotheses for problems arising in formal languages, in particular,
+    in automata theory and parsing.
+
+- time: 09:55 to 10:00
+  title: Introductions
+
+- time: 10:00 to 10:30
+  title: Coffee
+
+- time: 10:30 to 11:15
+  title: Precise Complexity Analysis of Coverability in Vector Addition Systems
+  speaker: Henry Sinclair-Banks
+  abstract: >-
+    Coverability in Vector Addition Systems with States (VASS) is a well-known,
+    well-studied, fundamental problem for infinite-state systems. In short, VASS
+    can be seen as finite automata equipped with non-negative integer counters
+    that can be incremented and decremented but cannot be zero-tested. Over the
+    last few years, our understanding of the exact complexity of coverability in
+    VASS has significantly improved. In this presentation, I will explain:
+    (i) a conditionally optimal ETH-based lower bound on the time required to
+    decide coverability in VASS with a non-fixed number of counters,
+    (ii) a conditional lower bound on the time required to decide coverability in
+    unary-encoded VASS with two counters, and (iii) the state-of-the-art
+    complexity of coverability in binary-encoded VASS with one counter.
+
+- time: 11:15 to 11:25
+  title: Mini break (no coffee)
+
+- time: 11:25 to 12:15
+  title: Spotlight talks
+  items:
+    - title: Fine-Grained Complexity of Ambiguity Problems on Automata
+      speaker: Anita Dürr
+      abstract: >-
+        In the field of computational logic, two classes of finite automata are
+        considered fundamental: deterministic and nondeterministic automata
+        (DFAs and NFAs). In a more fine-grained approach three natural
+        intermediate classes were introduced, defined by restricting the number
+        of accepting runs of the input NFA. The classes are called: unambiguous,
+        finitely ambiguous, and polynomially ambiguous finite automata. It was
+        observed that central problems, like equivalence, become tractable when
+        the input NFA is restricted to some of these classes. This naturally
+        brought interest into problems determining whether an input NFA belongs
+        to the intermediate classes. 
+        
+        I will present a nearly complete
+        characterization of the fine-grained complexity of these problems: the
+        respective quadratic and cubic running times of Allauzen et al. are
+        optimal under the Orthogonal Vectors hypothesis or the \(k\)-Cycle
+        hypothesis, for alphabets with at least two symbols. 
+        
+        This is based on the work available at
+        [https://arxiv.org/abs/2501.14725](https://arxiv.org/abs/2501.14725).
+    - title: A quick guide to the APSP conjecture
+      speaker: Jakob Nogler
+      abstract: >-
+        The aim of this talk is to spark your interest in one of the three
+        central hypotheses in fine-grained complexity: the All-Pairs Shortest
+        Path (APSP) conjecture. The conjecture asserts that no algorithm can
+        compute pairwise distances in a graph faster than \(O(n^{3-a})\) time for
+        any \(a > 0\). I will demonstrate how this assumption can be used not only to
+        prove the conditional optimality of your own algorithms, but also be used
+        to speed them up. We will briefly cover why you should definitely know
+        about the conjecture (even if you are not from the field), and where to
+        find more. Along the way, I will also mention open problems and recent
+        results, both my own and from others.
+    - title: >-
+        Classifying Identities: Subcubic Distributivity Checking and Hardness
+        from Arithmetic Progression Detection
+      speaker: Mirza Redzic
+      abstract: >-
+        We study the complexity of verifying algebraic identities on finite
+        structures. While previous work gave an optimal randomized algorithm for
+        testing associativity, whether distributivity could be verified in
+        subcubic time remained open. We resolve this by giving an
+        \(O(|S|^\omega)\)-time algorithm for distributivity, together with a matching
+        conditional lower bound based on the Triangle Detection Hypothesis. We
+        propose arithmetic progression detection in small universes as a
+        consequential algorithmic challenge: we show that unless we can detect
+        4-term arithmetic progressions in a set \(X \subseteq \{1,\dots,N\}\) in time
+        \(O(N^{2-\varepsilon})\), then (a) the 3-uniform 4-hyperclique hypothesis is true,
+        and (b) verifying certain identities requires running time \(|S|^{3-o(1)}\).
+        Finally, we classify a large family of 3-variable identities into three
+        complexity classes: quadratic, \(O(|S|^\omega)\), or cubic (all with matching
+        conditional lower bounds), and obtain near-optimal algorithms for
+        verifying whether a finite algebraic structure is a field or a ring.
+    - title: >-
+        Intersecting Dense Automata: Constructions, Complexity and Certificates
+      speaker: Neha Rino
+      abstract: >-
+        Given \(k\) nondeterministic finite automata (NFA), constructing an NFA that 
+        recognises the intersection of their languages is a basic problem in automata 
+        theory. We observe that the classical Cartesian product construction is non-optimal 
+        in the worst case, namely when the automata have many transitions. 
+        For a fixed alphabet, the Cartesian product of two NFA may have \(\Theta(m^2)\) 
+        transitions if these NFA have at most \(n\) states and \(m\) transitions each.   
+
+        In this talk, we give alternative constructions with \(O(m n)\) transitions, 
+        and more generally with \(O(m n^{k-1})\) transitions for the intersection of 
+        \(k\) NFA (for fixed \(k \ge 2\) and alphabet \(\Sigma\)).  This yields a faster
+        algorithm for the NFA intersection emptiness problem (NFA IE), which we prove 
+        optimal unless there is a breakthrough in combinatorial algorithms for detecting 
+        \((k+1)\)-cliques in undirected graphs (i.e., under the Combinatorial \(k\)-Clique 
+        Hypothesis). Finally, we show that these constructions also provide a faster 
+        certification scheme for NFA IE, suggesting that a tight fine-grained reduction 
+        from Boolean satisfiability (SAT) to NFA IE is unlikely. This is joint work 
+        with Dmitry Chistikov.
+
+- time: 12:15 to 12:30
+  title: Free time
+
+- time: 12:30 to 14:00
+  title: Lunch
+
+- time: 14:05 to 14:50
+  title: Fine-Grained Dichotomies for evaluating database queries
+  speaker: Nofar Carmeli
+  abstract: >-
+    Consider the task of evaluating queries over databases. We will start by
+    considering a very simple class of queries: join queries, and a simple
+    question: when can the query answers be enumerated with ideal time guarantees
+    (linear preprocessing and constant delay)? 
+    
+    As time permits, we will progress
+    into more expressive query classes (conjunctive queries and unions of
+    conjunctive queries), and into more demanding query-answering tasks, such as
+    allowing direct access to query answers (i.e., simulating a sorted array
+    containing the answers), every time asking a similar question. 
+    
+    The answer to
+    such a question is always a dichotomy: a condition on the query structure, an
+    efficient query evaluation algorithm in case it is satisfied, and a
+    conditional lower bound in case it is not.
+
+- time: 14:50 to 15:20
+  title: Coffee
+
+- time: 15:20 to 16:05
+  title: On The Fine Grained Complexity of Multi-Stack Reachability
+  speaker: Michael Wehar
+  abstract: >-
+    Determining whether there exists a string that is accepted by a given
+    pushdown automaton (PDA) is referred to as the non-emptiness problem for
+    pushdown automata. This is a classic problem that is complete for polynomial
+    time. Attempts to prove an unconditional superlinear time complexity lower
+    bound for this problem have been unsuccessful. However, an unconditional time
+    complexity lower bound can be proven for the intersection non-emptiness
+    problem for one PDA and multiple DFAs. We apply this result to show a lower
+    bound for the non-emptiness problem for multi-stack pushdown automata with
+    bounded phase switches (i.e. multi-stack PDAs where all stacks can push, but
+    only one designated stack can pop per switch). In particular, for \(k\) phase
+    switches, we prove a near-tight time complexity lower bound of \(n^{\Theta(2^k)}\)
+    where \(n\) is the number of states and \(k\) is the number of phase switches.
+
+- time: 16:05 to 16:15
+  title: Mini break (no coffee)
+
+- time: 16:15 to 17:00
+  title: On the Fine-Grained Complexity of Concurrency Testing
+  speaker: Andreas Pavlogiannis
+  abstract: >-
+    Concurrency is ubiquitous and comes in various forms, from multi-threading
+    inside a CPU to distributed systems, databases, and the internet of things.
+    Testing whether a concurrent system adheres to its prescribed behavior is a
+    natural algorithmic task, and a de-facto practice among researchers and
+    system developers. In this talk, we will overview the algorithmic complexity
+    of testing various systems and properties, through the fine-grained lens.
+    This is a rich landscape, even more so since concurrent systems exhibit
+    natural syntactic parameters, such as the number of communicating processes,
+    the number of shared objects, etc. We will also study concurrency testing
+    from the perspective of modern weak memory, whereby a concurrent system is
+    allowed to exhibit complex and often counter-intuitive behaviors that escape
+    the standard interleaving view. The plethora of weak memory models provides a
+    fertile ground for fun and interesting fine-grained complexity questions of
+    practical relevance, some of which we will tackle in this talk.
+
+- time: 17:00 to 17:10
+  title: Mini break (no coffee)
+
+- time: 17:10 to 17:55
+  title: Online Orthogonal Vectors Revisited
+  speaker: Alexander Golovnev
+  abstract: >-
+    We prove new upper and lower bounds for the Online Orthogonal Vectors
+    Problem (OnlineOV). In this problem, a preprocessing algorithm receives \(n\)
+    vectors and constructs a data structure of size \(S\). Subsequently, a query
+    algorithm receives a vector \(q\) and, in time \(T\), determines whether \(q\) is
+    orthogonal to any of the input vectors. 
+    
+    Using a novel
+    structure-versus-randomness decomposition, we design data structures that
+    outperform all known constructions and refute a conjecture regarding the
+    hardness of OnlineOV. On the lower-bound side, assuming the Non-uniform
+    Strong Exponential Time Hypothesis, we prove arbitrarily large polynomial
+    lower bounds on the space \(S\) required by any OnlineOV data structure with
+    computationally unbounded preprocessing and sublinear query time.
