@@ -2,12 +2,13 @@
 {{- $data := transform.Unmarshal (readFile $path) -}}
 <div class="schedule">
   {{- range $data -}}
+    {{- $entry := . -}}
     {{- $isBreak := and (not .speaker) (not .items) (not .abstract) -}}
     <div class="schedule__row{{ if $isBreak }} schedule__row--break{{ end }}">
       <div class="schedule__time">{{ replace .time " to " "–" }}</div>
       <div class="schedule__body">
         {{- if .items -}}
-          <div class="schedule__title">{{ .title }}</div>
+          <div class="schedule__title">{{ with $entry.link }}<a href="{{ . }}">{{ $entry.title }}</a>{{ else }}{{ $entry.title }}{{ end }}</div>
           <ul class="schedule__items">
             {{- range .items -}}
               <li>
@@ -20,7 +21,7 @@
             {{- end -}}
           </ul>
         {{- else -}}
-          <div class="schedule__title">{{ .title }}</div>
+          <div class="schedule__title">{{ with .link }}<a href="{{ . }}">{{ $entry.title }}</a>{{ else }}{{ $entry.title }}{{ end }}</div>
           {{- with .speaker }}<div class="schedule__speaker">{{ . }}</div>{{ end -}}
           {{- with .abstract }}{{ if ne . "TBA" }}
             <details class="schedule__abstract"><summary>Abstract</summary>{{ partial "schedule-abstract.html" . }}</details>
