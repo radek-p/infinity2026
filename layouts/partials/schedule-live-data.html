@@ -1,0 +1,105 @@
+<script>
+if (!window.InfinityLive) {
+  window.InfinityLive = (function () {
+    var WORKSHOP_DATE = new Date('2026-07-06T00:00:00');
+    // The top panel appears from 45 minutes before the workshop day starts,
+    // and disappears once the (informal, off-programme) dinner has clearly
+    // wrapped up. The dinner has no listed end time — by agreement we treat
+    // it as lasting 2 hours from its 19:30 start, i.e. until 21:30 — without
+    // adding that end time to the actual programme data.
+    var PANEL_START = new Date('2026-07-05T23:15:00');
+    var PANEL_END = new Date('2026-07-06T21:30:00');
+
+    // Testing aid: set window.__scheduleDebugNow (browser console, no system
+    // clock change needed) to any Date-parseable string, e.g.
+    //   window.__scheduleDebugNow = '2026-07-06T11:20:00'
+    // Clear it (delete window.__scheduleDebugNow) to return to the real clock.
+    function debugNow() {
+      if (!window.__scheduleDebugNow) return null;
+      var d = new Date(window.__scheduleDebugNow);
+      return isNaN(d.getTime()) ? null : d;
+    }
+
+    function now() {
+      return debugNow() || new Date();
+    }
+
+    function toMinutes(hhmm) {
+      var parts = hhmm.split(':');
+      return parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
+    }
+
+    function panelVisible(d) {
+      return d >= PANEL_START && d < PANEL_END;
+    }
+
+    // Every row's start/end is always anchored to the workshop's own calendar
+    // date (not whatever date "now" happens to be) — this is what makes the
+    // pre-show window (the evening before) correctly treat every session as
+    // still upcoming, instead of comparing bare times-of-day across midnight.
+    function atWorkshopTime(hhmm) {
+      var t = toMinutes(hhmm);
+      var d = new Date(WORKSHOP_DATE);
+      d.setHours(Math.floor(t / 60), t % 60, 0, 0);
+      return d;
+    }
+
+    function rowStart(row) {
+      return atWorkshopTime(row.dataset.start);
+    }
+
+    function rowEnd(row) {
+      return row.dataset.end ? atWorkshopTime(row.dataset.end) : PANEL_END;
+    }
+
+    // Reads .schedule__row[data-start] elements already on the page (rendered
+    // by the schedule shortcode) and works out which one is current and which
+    // is next, given a moment in time.
+    function findNowAndNext(d) {
+      var rows = Array.prototype.slice.call(document.querySelectorAll('.schedule__row[data-start]'));
+
+      var nowRow = null, nowEnd = null;
+      rows.forEach(function (row) {
+        var start = rowStart(row), end = rowEnd(row);
+        if (d >= start && d < end) {
+          nowRow = row;
+          nowEnd = end;
+        }
+      });
+
+      var nextRow = null;
+      for (var i = 0; i < rows.length; i++) {
+        if (rowStart(rows[i]) > d) {
+          nextRow = rows[i];
+          break;
+        }
+      }
+
+      return {
+        nowRow: nowRow,
+        nextRow: nextRow,
+        minsSinceNowStart: nowRow ? Math.round((d - rowStart(nowRow)) / 60000) : null,
+        minsUntilNowEnd: nowRow ? Math.round((nowEnd - d) / 60000) : null,
+        minsUntilNextStart: nextRow ? Math.round((rowStart(nextRow) - d) / 60000) : null
+      };
+    }
+
+    function formatDuration(mins) {
+      mins = Math.max(0, Math.round(mins));
+      if (mins < 60) return mins + ' min';
+      var h = Math.floor(mins / 60), m = mins % 60;
+      return h + 'h' + (m ? ' ' + m + 'm' : '');
+    }
+
+    return {
+      now: now,
+      debugNow: debugNow,
+      panelVisible: panelVisible,
+      findNowAndNext: findNowAndNext,
+      formatDuration: formatDuration,
+      PANEL_START: PANEL_START,
+      PANEL_END: PANEL_END
+    };
+  })();
+}
+</script>

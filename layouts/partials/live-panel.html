@@ -1,0 +1,244 @@
+{{ partial "schedule-live-data.html" . }}
+<div id="livePanel" class="live-panel" hidden>
+  <div class="live-panel__inner">
+    <div class="live-panel__section-heading">
+      <span>Happening now</span>
+      <span class="live-panel__heading-right" data-panel="clock"></span>
+    </div>
+
+    <div class="live-panel__block" data-panel-row="now">
+      <div class="live-panel__label live-panel__label--now">now</div>
+      <div class="live-panel__meta">
+        <span class="live-panel__time" data-panel="now-time"></span>
+        <span class="live-panel__rel" data-panel="now-rel"></span>
+      </div>
+      <div class="live-panel__title" data-panel="now-title"></div>
+      <div class="live-panel__speaker" data-panel="now-speaker"></div>
+    </div>
+    <div class="live-panel__block" data-panel-row="next">
+      <div class="live-panel__label live-panel__label--next">next</div>
+      <div class="live-panel__meta">
+        <span class="live-panel__time" data-panel="next-time"></span>
+        <span class="live-panel__rel" data-panel="next-rel"></span>
+      </div>
+      <div class="live-panel__title" data-panel="next-title"></div>
+      <div class="live-panel__speaker" data-panel="next-speaker"></div>
+    </div>
+
+    <div class="live-panel__section-heading">
+      <span>Venue</span>
+      <span class="live-panel__heading-right"><a href="https://intranet.royalholloway.ac.uk/students/assets/docs/pdf/rh100/the-windsor-building.pdf" target="_blank" rel="noopener">Campus map</a></span>
+    </div>
+    <div class="live-panel__block live-panel__block--map">
+      <p class="live-panel__map-caption">Room 0-02, Windsor Building</p>
+      <a class="live-panel__map" href="/windsor-map-dark.png" target="_blank" rel="noopener">
+        <img
+          src="/windsor-map-dark.png"
+          alt="Ground floor map of the Windsor Building at Royal Holloway, showing Room 0-02 (INFINITY 2026) highlighted in gold, with a white arrow marking the route from the main entrance."
+        >
+      </a>
+    </div>
+
+    <p class="live-panel__debug" data-panel="debug" hidden></p>
+  </div>
+</div>
+
+<style>
+.live-panel {
+  background: var(--background);
+  border-bottom: 1px solid var(--accent);
+  font-size: 1.05rem;
+}
+.live-panel__inner {
+  max-width: 864px;
+  padding: 0 40px;
+}
+
+.live-panel__section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.8em;
+  padding: 0.8em 0 0.4em;
+  opacity: 1;
+  font-weight: bold;
+  color: var(--accent);
+}
+
+.live-panel__section-heading .live-panel__heading-right, .live-panel__section-heading .live-panel__heading-right a {
+  font-weight: normal;
+  color: var(--foreground);
+  opacity: 50%;
+}
+
+.live-panel__block+.live-panel__section-heading {
+  padding-top: 50px;
+}
+
+.live-panel__block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.3em;
+  padding: 0.6em 0 0.8em;
+}
+.live-panel__block[hidden] {
+  display: none;
+}
+.live-panel__block[data-panel-row="now"],
+.live-panel__block[data-panel-row="next"] {
+  border-bottom: 1px solid color-mix(in srgb, var(--foreground) 15%, transparent);
+}
+
+.live-panel__label {
+  font-weight: normal;
+  white-space: nowrap;
+}
+.live-panel__label--now {
+  color: var(--accent);
+  animation: live-panel-blink 1.8s ease-in-out infinite;
+}
+.live-panel__label--next {
+  color: var(--foreground);
+  opacity: 0.5;
+}
+@keyframes live-panel-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+.live-panel__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.8em;
+}
+.live-panel__time {
+  font-weight: normal;
+}
+.live-panel__rel {
+  font-weight: normal;
+  color: var(--accent);
+  opacity: 0.85;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.live-panel__title {
+  font-weight: bold;
+}
+.live-panel__speaker {
+  font-weight: normal;
+  opacity: 0.7;
+}
+.live-panel__speaker:empty {
+  display: none;
+}
+
+.live-panel__block--map {
+  align-items: flex-start;
+  gap: 0.6em;
+}
+.live-panel__map {
+  display: block;
+  line-height: 0;
+}
+.live-panel__map img {
+  display: block;
+  width: 440px;
+  max-width: 100%;
+  height: auto;
+  border: none;
+  padding: 0;
+}
+.live-panel__map-caption {
+  margin: 0;
+  font-weight: normal;
+  opacity: 0.7;
+}
+
+.live-panel__debug {
+  margin: 0;
+  padding: 0.6em 0;
+  font-weight: normal;
+  opacity: 0.6;
+}
+
+@media (max-width: 684px) {
+  .live-panel__inner {
+    padding: 0 20px;
+  }
+  .live-panel__block--map {
+    /*min-height: 40vh;*/
+    justify-content: center;
+  }
+  .live-panel__block--map img {
+    width: auto;
+    /*max-height: 33vh;*/
+  }
+}
+</style>
+<script>
+if (!window.__livePanelInit) {
+  window.__livePanelInit = true;
+  document.addEventListener('DOMContentLoaded', function () {
+    function pad2(n) {
+      return (n < 10 ? '0' : '') + n;
+    }
+
+    function fillBlock(panel, prefix, row, relText) {
+      var block = panel.querySelector('[data-panel-row="' + prefix + '"]');
+      block.hidden = !row;
+      if (!row) return;
+      panel.querySelector('[data-panel="' + prefix + '-time"]').textContent = row.dataset.time;
+      panel.querySelector('[data-panel="' + prefix + '-title"]').textContent = row.dataset.title;
+      panel.querySelector('[data-panel="' + prefix + '-speaker"]').textContent = row.dataset.speaker || '';
+      panel.querySelector('[data-panel="' + prefix + '-rel"]').textContent = relText;
+    }
+
+    function update() {
+      var L = window.InfinityLive;
+      var d = L.now();
+      var panel = document.getElementById('livePanel');
+      if (!panel) return;
+
+      if (!L.panelVisible(d)) {
+        panel.hidden = true;
+        return;
+      }
+      panel.hidden = false;
+
+      panel.querySelector('[data-panel="clock"]').textContent = pad2(d.getHours()) + ':' + pad2(d.getMinutes());
+
+      var result = L.findNowAndNext(d);
+
+      var nowRel = '';
+      if (result.nowRow) {
+        var sinceStart = result.minsSinceNowStart;
+        if (sinceStart < 1) {
+          nowRel = 'just began';
+        } else if (sinceStart < 15) {
+          nowRel = 'began ' + L.formatDuration(sinceStart) + ' ago';
+        } else {
+          nowRel = 'ends in ' + L.formatDuration(result.minsUntilNowEnd);
+        }
+      }
+      fillBlock(panel, 'now', result.nowRow, nowRel);
+
+      var nextRel = result.nextRow ? 'begins in ' + L.formatDuration(result.minsUntilNextStart) : '';
+      fillBlock(panel, 'next', result.nextRow, nextRel);
+
+      var dbg = L.debugNow();
+      var debugEl = panel.querySelector('[data-panel="debug"]');
+      debugEl.hidden = !dbg;
+      if (dbg) {
+        debugEl.textContent = 'Debug time (window.__scheduleDebugNow): ' +
+          dbg.toLocaleString(undefined, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+      }
+    }
+
+    update();
+    setInterval(update, 20000);
+  });
+}
+</script>

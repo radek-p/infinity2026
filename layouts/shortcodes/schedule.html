@@ -1,10 +1,19 @@
 {{- $path := .Get 0 | default "static/program.yaml" -}}
 {{- $data := transform.Unmarshal (readFile $path) -}}
+{{ partial "schedule-live-data.html" . }}
 <div class="schedule">
   {{- range $data -}}
     {{- $entry := . -}}
     {{- $isBreak := and (not .speaker) (not .items) (not .abstract) -}}
-    <div class="schedule__row{{ if $isBreak }} schedule__row--break{{ end }}">
+    {{- $start := .time -}}
+    {{- $end := "" -}}
+    {{- $timeLabel := replace .time " to " "–" -}}
+    {{- if strings.Contains .time " to " -}}
+      {{- $parts := split .time " to " -}}
+      {{- $start = index $parts 0 -}}
+      {{- $end = index $parts 1 -}}
+    {{- end -}}
+    <div class="schedule__row{{ if $isBreak }} schedule__row--break{{ end }}" data-start="{{ $start }}"{{ with $end }} data-end="{{ . }}"{{ end }} data-time="{{ $timeLabel }}" data-title="{{ $entry.title }}"{{ with .speaker }} data-speaker="{{ . }}"{{ end }}>
       <div class="schedule__time">{{ replace .time " to " "–" }}</div>
       <div class="schedule__body">
         {{- if .items -}}
@@ -91,4 +100,52 @@
 .schedule__abstract-body > p {
   margin: 0;
 }
+
+.schedule__row--now {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border-bottom-color: var(--accent);
+  margin: 0 -0.8ch;
+  padding: 0.6em 0.8ch;
+}
+.schedule__now-badge {
+  display: inline-block;
+  margin-left: 0.6ch;
+  padding: 0.05em 0.6em;
+  font-size: 0.7em;
+  font-weight: bold;
+  letter-spacing: 0.03em;
+  color: var(--background);
+  background: var(--accent);
+  vertical-align: middle;
+}
 </style>
+<script>
+if (!window.__scheduleNowInit) {
+  window.__scheduleNowInit = true;
+  document.addEventListener('DOMContentLoaded', function () {
+    function updateNow() {
+      var L = window.InfinityLive;
+      var result = L.findNowAndNext(L.now());
+
+      document.querySelectorAll('.schedule__row[data-start]').forEach(function (row) {
+        var isActive = row === result.nowRow;
+        row.classList.toggle('schedule__row--now', isActive);
+
+        var badge = row.querySelector('.schedule__now-badge');
+        if (isActive && !badge) {
+          badge = document.createElement('span');
+          badge.className = 'schedule__now-badge';
+          badge.textContent = 'Now';
+          var label = row.querySelector('.schedule__title') || row.querySelector('.schedule__time');
+          if (label) label.appendChild(badge);
+        } else if (!isActive && badge) {
+          badge.remove();
+        }
+      });
+    }
+
+    updateNow();
+    setInterval(updateNow, 20000);
+  });
+}
+</script>

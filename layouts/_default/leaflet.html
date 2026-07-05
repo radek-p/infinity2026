@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>{{ site.Title }} &mdash; Printed programme</title>
+<style>
+/* Self-hosted Fira Code, same files the theme ships (this page bypasses the
+   theme entirely, so fonts/colours are restated here to match the site). */
+@font-face {
+  font-family: 'Fira Code';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("/fonts/FiraCode-LatinExt.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Fira Code';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("/fonts/FiraCode-Latin.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  /* Print palette: the site's dark theme inverted for paper/ink economy.
+     Foreground reuses the site's exact dark background hue as ink colour. */
+  --background: #ffffff;
+  --foreground: #1a170f;
+  --accent: #eec35e;
+  --accent-dark: #8a6710;
+  --page-w: 176mm;
+  --page-h: 250mm;
+  --page-margin: 15mm;
+}
+
+/* B5 (176 x 250mm) — sits between A4 (210x297) and A5 (148x210).
+   Zero @page margin throughout: every page's own box is the full physical
+   sheet, with `padding: var(--page-margin)` standing in for the margin on
+   pages that need one. This lets page numbers (and cover/closing's bleed
+   art) address the whole sheet directly. It's safe now that every page is
+   an explicit, template-controlled single physical page — there's no more
+   organic (browser-driven) overflow that would need a real reserved margin
+   to stay consistent across an unpredictable page break. */
+@page {
+  size: var(--page-w) var(--page-h);
+  margin: 0;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Fira Code', ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 10.5pt;
+  line-height: 1.45;
+  background: var(--background);
+  color: var(--foreground);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+a { color: var(--accent); }
+
+/* On-screen preview: show each printed sheet as a distinct "page" floating
+   on a neutral backdrop, at true physical size, so what you see roughly
+   matches what will come out of Print to PDF. Printing itself ignores this. */
+@media screen {
+  body { background: #555; }
+  .sheet {
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+    margin: 24px auto;
+  }
+}
+
+.sheet {
+  width: var(--page-w);
+  background: var(--background);
+}
+
+.page {
+  position: relative;
+  width: var(--page-w);
+  height: var(--page-h);
+  page-break-after: always;
+  break-after: page;
+}
+.page:last-child {
+  page-break-after: auto;
+  break-after: auto;
+}
+
+.page.cover, .page.closing {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.page.closing {
+  page-break-before: always;
+  break-before: page;
+}
+
+.page__art {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 145%;
+  color: var(--accent);
+  opacity: 0.1;
+  z-index: 0;
+}
+.page__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 0 calc(var(--page-margin) + 4mm);
+}
+
+.cover h1 {
+  font-size: 1.9rem;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  margin: 0.15em 0 0;
+}
+.cover .programme-label {
+  font-size: 1.9rem;
+  font-weight: bold;
+  color: var(--foreground);
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+.cover .eyebrow {
+  position: absolute;
+  top: calc(var(--page-margin) + 10mm);
+  left: 0;
+  right: 0;
+  z-index: 1;
+  text-align: center;
+  font-size: 1rem;
+  opacity: 0.7;
+  letter-spacing: 0.02em;
+  padding: 0 calc(var(--page-margin) + 4mm);
+}
+.cover .footer-meta {
+  position: absolute;
+  bottom: calc(var(--page-margin) + 10mm);
+  left: 0;
+  right: 0;
+  z-index: 1;
+  text-align: center;
+  font-size: 1rem;
+  opacity: 0.7;
+  letter-spacing: 0.02em;
+  padding: 0 calc(var(--page-margin) + 4mm);
+}
+
+.closing .page__content {
+  position: absolute;
+  bottom: calc(var(--page-margin) + 10mm);
+  left: 0;
+  right: 0;
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+.closing .page__content p { margin: 0; }
+.closing .page__content .closing-title { font-weight: bold; }
+.programme-header h2 {
+  color: var(--accent);
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 0.3em;
+  margin: 0 0 0.2em;
+}
+.programme-header p {
+  margin: 0 0 1em;
+  opacity: 0.85;
+  font-size: 0.88em;
+}
+
+.p-row {
+  display: flex;
+  gap: 1.2ch;
+  padding: 0.4em 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--foreground) 20%, transparent);
+  break-inside: avoid;
+}
+.p-row--first {
+  border-top: 1px solid color-mix(in srgb, var(--foreground) 20%, transparent);
+}
+.p-row--break {
+  padding: 0.65em 0;
+}
+.p-time {
+  flex: 0 0 10.5ch;
+  color: var(--accent-dark);
+  white-space: nowrap;
+  font-size: 0.92em;
+}
+.p-time .p-time-filler {
+  opacity: 0.01;
+}
+.p-body { flex: 1 1 auto; min-width: 0; }
+.p-title { font-weight: bold; }
+.p-row--break .p-title { font-weight: normal; opacity: 0.65; }
+.p-speaker { opacity: 0.85; font-size: 0.92em; }
+
+.p-items { list-style: disc; margin: 0.3em 0 0; padding-left: 1.4em; }
+.p-items > li {
+  margin: 0;
+  padding: 0.4em 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--foreground) 20%, transparent);
+  break-inside: avoid;
+}
+.p-items > li:last-child { border-bottom: none; }
+.p-items > li::marker { color: var(--accent); }
+
+.p-abstract {
+  margin-top: 0.3em;
+  opacity: 0.88;
+  font-size: 0.75em;
+  line-height: 1.35;
+}
+.p-abstract > p { margin: 0; }
+
+.programme-page {
+  padding: var(--page-margin);
+}
+
+/* Pages with exactly two abstract-bearing talks (the common case) get a
+   fixed-height flex column, so the two abstracts split whatever vertical
+   space remains after the constant-height rows exactly in half. Border-box
+   sizing means the flex column's content-box height is already page-height
+   minus the padding above, so no extra subtraction is needed here. (Using
+   100% here instead would resolve against <body>'s auto height, not the
+   page itself, and silently break the whole fixed-height premise.) */
+.page--split {
+  display: flex;
+  flex-direction: column;
+  height: var(--page-h);
+}
+.page--split .p-row {
+  flex: 0 0 auto;
+}
+.page--split .p-row--fill {
+  flex: 1 1 0;
+  min-height: 0;
+}
+/* Within a Spotlight chunk, recurse the same even-split logic one level
+   deeper: the two sub-talks divide whatever height the outer row got. */
+.page--split .p-row--spotlight {
+  display: flex;
+}
+.page--split .p-row--spotlight .p-body {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.page--split .p-row--spotlight .p-items {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+.page--split .p-row--spotlight .p-items > li {
+  flex: 1 1 0;
+  min-height: 0;
+}
+
+/* Page numbers, centered in the bottom margin band. Chromium's print engine
+   doesn't support CSS @page margin-box content (@bottom-center etc.), and its
+   own header/footer feature uses a separate, unstyleable context — so these
+   are rendered as ordinary page content instead, using the page boundaries
+   the template already controls. A .page-number's containing block is its
+   .page element's *padding* box, which (absent any border) spans the full
+   element — padding lives inside it, it doesn't shrink it — so 6mm from the
+   true edge is correct everywhere, .programme-page's own padding included. */
+.page-number {
+  position: absolute;
+  bottom: 6mm;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  text-align: center;
+  font-size: 0.75rem;
+  opacity: 0.55;
+}
+</style>
+{{ partial "math.html" . }}
+</head>
+<body>
+
+  {{- $pageNum := 0 -}}
+  {{- $pageNum = add $pageNum 1 -}}
+  <section class="page cover sheet">
+    <div class="page-number">{{ $pageNum }}</div>
+    <div class="page__art">{{ partial "infinity-ascii-art.html" . }}</div>
+    <p class="eyebrow">{{ site.Params.subtitle }}</p>
+    <div class="page__content">
+      <p class="programme-label">Programme</p>
+      <h1>{{ site.Title }}</h1>
+    </div>
+    <p class="footer-meta">Monday, 6 July 2026 &middot; Royal Holloway, University of London</p>
+  </section>
+
+  <!-- Blank spacer: shifts every later page by one, so the two Spotlight
+       talks pages land on the same open spread (see pagination note below). -->
+  {{- $pageNum = add $pageNum 1 -}}
+  <section class="page blank sheet">
+    <div class="page-number">{{ $pageNum }}</div>
+  </section>
+
+  {{- $pageNum = add $pageNum 1 -}}
+  <section class="page programme-page sheet page--split">
+    <div class="page-number">{{ $pageNum }}</div>
+    <div class="programme-header">
+      <h2>Programme</h2>
+      <p>{{ site.Params.subtitle }}<br>Monday, 6 July 2026 &middot; Royal Holloway, University of London</p>
+    </div>
+
+    {{- $talkCount := 0 -}}
+    {{- $rowIsFirst := true -}}
+    {{- $data := transform.Unmarshal (readFile "static/program.yaml") -}}
+    {{- range $data -}}
+      {{- $entry := . -}}
+      {{- $isBreak := and (not .speaker) (not .items) (not .abstract) -}}
+      {{- $isTalk := or .abstract .items -}}
+      {{- $timeLabel := replace .time " to " "–" -}}
+      {{- if not (strings.Contains .time " to ") -}}
+        {{- $timeLabel = printf `%s<span class="p-time-filler">&ndash;00:00</span>` $timeLabel -}}
+      {{- end -}}
+      {{- if .items -}}
+        {{- /* Render as two template-paginated chunks (2 sub-talks each) instead
+               of one flowing list, so each chunk behaves exactly like a normal
+               talk for page-breaking: predictable page--split flex sizing, a
+               full-width top rule via p-row--first, and no reliance on the
+               browser's own (unpredictable) mid-list page fragmentation. */ -}}
+        {{- range $chunkIndex, $chunk := (slice (first 2 .items) (after 2 .items)) -}}
+          {{- if gt (len $chunk) 0 -}}
+            {{- if ge $talkCount 2 -}}
+              </section>
+              {{- $pageNum = add $pageNum 1 -}}
+              <section class="page programme-page sheet page--split">
+              <div class="page-number">{{ $pageNum }}</div>
+              {{- $talkCount = 0 -}}
+              {{- $rowIsFirst = true -}}
+            {{- end -}}
+            <div class="p-row p-row--fill p-row--spotlight{{ if $rowIsFirst }} p-row--first{{ end }}">
+              <div class="p-time">{{ $timeLabel | safeHTML }}</div>
+              <div class="p-body">
+                <div class="p-title">{{ $entry.title }}</div>
+                <ul class="p-items">
+                  {{- range $chunk -}}
+                    <li>
+                      <div class="p-title">{{ .title }}</div>
+                      {{- with .speaker }}<div class="p-speaker">{{ . }}</div>{{ end -}}
+                      {{- with .abstract }}{{ if ne . "TBA" }}
+                        <div class="p-abstract">{{ partial "schedule-abstract.html" . }}</div>
+                      {{- end }}{{ end -}}
+                    </li>
+                  {{- end -}}
+                </ul>
+              </div>
+            </div>
+            {{- if eq $chunkIndex 0 -}}
+              {{- /* The second Spotlight page carries "Free time" and "Lunch"
+                     as constant-height rows after its two sub-talks; this page
+                     has none, so its single flex row would get 100% of the
+                     height instead of the same reduced share. Two matching
+                     phantom rows keep the two Spotlight pages' splits (and
+                     separator lines) aligned across the spread. */ -}}
+              <div class="p-row p-row--break p-row--phantom">
+                <div class="p-time">&nbsp;</div>
+                <div class="p-body"><div class="p-title">&nbsp;</div></div>
+              </div>
+              <div class="p-row p-row--break p-row--phantom">
+                <div class="p-time">&nbsp;</div>
+                <div class="p-body"><div class="p-title">&nbsp;</div></div>
+              </div>
+            {{- end -}}
+            {{- $rowIsFirst = false -}}
+            {{- $talkCount = 2 -}}
+          {{- end -}}
+        {{- end -}}
+      {{- else -}}
+        {{- if and $isTalk (ge $talkCount 2) -}}
+          </section>
+          {{- $pageNum = add $pageNum 1 -}}
+          <section class="page programme-page sheet page--split">
+          <div class="page-number">{{ $pageNum }}</div>
+          {{- $talkCount = 0 -}}
+          {{- $rowIsFirst = true -}}
+        {{- end -}}
+        <div class="p-row{{ if $isBreak }} p-row--break{{ end }}{{ if $rowIsFirst }} p-row--first{{ end }}{{ if .abstract }} p-row--fill{{ end }}">
+          <div class="p-time">{{ $timeLabel | safeHTML }}</div>
+          <div class="p-body">
+            <div class="p-title">{{ $entry.title }}</div>
+            {{- with .speaker }}<div class="p-speaker">{{ . }}</div>{{ end -}}
+            {{- with .abstract }}{{ if ne . "TBA" }}
+              <div class="p-abstract">{{ partial "schedule-abstract.html" . }}</div>
+            {{- end }}{{ end -}}
+          </div>
+        </div>
+        {{- if eq .time "16:05 to 16:15" -}}
+          {{- /* Phantom, invisible constant-height spacer: pads this page by
+                 one break-row's worth of height so it carries the same
+                 constant-row budget (k) as the facing page, keeping the two
+                 pages' abstract splits — and thus their separator lines —
+                 aligned when the booklet is opened as a spread. */ -}}
+          <div class="p-row p-row--break p-row--phantom">
+            <div class="p-time">&nbsp;</div>
+            <div class="p-body"><div class="p-title">&nbsp;</div></div>
+          </div>
+        {{- end -}}
+        {{- $rowIsFirst = false -}}
+        {{- if $isTalk -}}
+          {{- $talkCount = add $talkCount 1 -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  </section>
+
+  {{- $pageNum = add $pageNum 1 -}}
+  <section class="page closing sheet">
+    <div class="page-number">{{ $pageNum }}</div>
+    <div class="page__art">{{ partial "infinity-ascii-art.html" . }}</div>
+    <div class="page__content">
+      <p class="closing-title">{{ site.Title }}</p>
+      <p>infinity2026.pages.dev</p>
+    </div>
+  </section>
+
+</body>
+</html>
