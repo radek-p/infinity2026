@@ -102,10 +102,11 @@
 }
 
 .schedule__row--now {
-  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  /*background: color-mix(in srgb, var(--accent) 12%, transparent);*/
+  border-top: 1px solid var(--accent);
   border-bottom-color: var(--accent);
-  margin: 0 -0.8ch;
-  padding: 0.6em 0.8ch;
+  margin: -1px 0 0 0;
+  /*padding: 0.6em 0.8ch;*/
 }
 .schedule__now-badge {
   display: inline-block;
@@ -117,6 +118,10 @@
   color: var(--background);
   background: var(--accent);
   vertical-align: middle;
+  border-radius: 20px;
+}
+.schedule__row--break.schedule__row--now .schedule__title {
+  opacity: 1;
 }
 </style>
 <script>
