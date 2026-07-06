@@ -51,6 +51,9 @@
   items:
     - title: Fine-Grained Complexity of Ambiguity Problems on Automata
       speaker: Anita Dürr
+      slides:
+        - url: /slides-durr-pauses.pdf
+          label: slides with pauses
       abstract: >-
         In the field of computational logic, two classes of finite automata are
         considered fundamental: deterministic and nondeterministic automata
@@ -73,6 +76,9 @@
         [https://arxiv.org/abs/2501.14725](https://arxiv.org/abs/2501.14725).
     - title: A quick guide to the APSP conjecture
       speaker: Jakob Nogler
+      slides:
+        - url: /slides-nogler.pdf
+          label: slides without pauses
       abstract: >-
         The aim of this talk is to spark your interest in one of the three
         central hypotheses in fine-grained complexity: the All-Pairs Shortest
@@ -107,6 +113,9 @@
     - title: >-
         Intersecting Dense Automata: Constructions, Complexity and Certificates
       speaker: Neha Rino
+      slides:
+        - url: /slides-rino-pauses.pdf
+          label: slides with pauses
       abstract: >-
         Given \(k\) nondeterministic finite automata (NFA), constructing an NFA that 
         recognises the intersection of their languages is a basic problem in automata 
