@@ -23,6 +23,7 @@
               <li>
                 <div class="schedule__title">{{ .title }}</div>
                 {{- with .speaker }}<div class="schedule__speaker">{{ . }}</div>{{ end -}}
+                {{- with .slides }}<div class="schedule__slides">{{- range . }}<a href="{{ .url }}" class="schedule__slides-link">{{ .label }}</a>{{ end -}}</div>{{ end -}}
                 {{- with .abstract }}{{ if ne . "TBA" }}
                   <details class="schedule__abstract"><summary>Abstract</summary>{{ partial "schedule-abstract.html" . }}</details>
                 {{- end }}{{ end -}}
@@ -32,6 +33,7 @@
         {{- else -}}
           <div class="schedule__title">{{ with .link }}<a href="{{ . }}">{{ $entry.title }}</a>{{ else }}{{ $entry.title }}{{ end }}</div>
           {{- with .speaker }}<div class="schedule__speaker">{{ . }}</div>{{ end -}}
+          {{- with .slides }}<div class="schedule__slides">{{- range . }}<a href="{{ .url }}" class="schedule__slides-link">{{ .label }}</a>{{ end -}}</div>{{ end -}}
           {{- with .abstract }}{{ if ne . "TBA" }}
             <details class="schedule__abstract"><summary>Abstract</summary>{{ partial "schedule-abstract.html" . }}</details>
           {{- end }}{{ end -}}
@@ -83,6 +85,16 @@
 }
 .schedule__items > li::marker {
   color: var(--accent);
+}
+.schedule__slides {
+  margin-top: 0.2em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6em;
+}
+.schedule__slides-link {
+  font-size: 0.9em;
+  opacity: 0.8;
 }
 .schedule__abstract {
   margin-top: 0.3em;

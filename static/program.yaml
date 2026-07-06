@@ -6,6 +6,11 @@
 - time: 09:10 to 09:55
   title: Fine-Grained Complexity and Formal Languages
   speaker: Henning Fernau
+  slides:
+    - url: /slides-fernau.pdf
+      label: slides without pauses
+    - url: /slides-fernau-pauses.pdf
+      label: slides with pauses
   abstract: >-
     In this talk, some basic ideas of fine-grained complexity are introduced.
     This includes the presentation of key hypotheses like (S)ETH, OVH, APSP and
