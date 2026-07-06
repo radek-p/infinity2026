@@ -2,11 +2,11 @@
 if (!window.InfinityLive) {
   window.InfinityLive = (function () {
     var WORKSHOP_DATE = new Date('2026-07-06T00:00:00');
-    // The top panel appears from 45 minutes before the workshop day starts,
-    // and disappears once the (informal, off-programme) dinner has clearly
-    // wrapped up. The dinner has no listed end time — by agreement we treat
-    // it as lasting 2 hours from its 19:30 start, i.e. until 21:30 — without
-    // adding that end time to the actual programme data.
+    // PANEL_START: when the top live panel first appears (the evening before).
+    // THANK_YOU_START: once the workshop day has wrapped up (right after the
+    //   dinner's 21:30 end), the panel switches from live now/next info to a
+    //   thank-you message.
+    // PANEL_END: when that thank-you message itself stops showing.
     var PANEL_START = new Date('2026-07-05T23:15:00');
     var THANK_YOU_START = new Date('2026-07-06T21:30:00');
     var PANEL_END = new Date('2026-07-13T00:00:00');
