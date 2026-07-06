@@ -17,12 +17,10 @@
   "    @@@::::::::::::::+                @%@@::::::::::::::    "
   "       @@@:::::::                          @@::::::::       "
 -}}
-{{- $cols := 60 -}}
 {{- $rows := len $lines -}}
-{{- $charW := 12 -}}
 {{- $lineH := 24 -}}
-{{- $vbW := mul $cols $charW -}}
+{{- $vbW := 864 -}}
 {{- $vbH := mul $rows $lineH -}}
 <svg class="infinity-ascii-art" viewBox="0 0 {{ $vbW }} {{ $vbH }}" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-  <text x="0" y="{{ $lineH }}" xml:space="preserve" font-family="'Fira Code', ui-monospace, monospace" font-size="{{ $lineH }}" fill="currentColor">{{ range $i, $line := $lines }}<tspan x="0" dy="{{ if eq $i 0 }}0{{ else }}{{ $lineH }}{{ end }}">{{ $line }}</tspan>{{ end }}</text>
+  <text x="0" y="{{ $lineH }}" xml:space="preserve" font-family="'Fira Code', ui-monospace, monospace" font-size="{{ $lineH }}" fill="var(--accent)">{{ range $i, $line := $lines }}<tspan x="0" dy="{{ if eq $i 0 }}0{{ else }}{{ $lineH }}{{ end }}">{{ $line }}</tspan>{{ end }}</text>
 </svg>
