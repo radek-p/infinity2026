@@ -146,6 +146,9 @@
 - time: 14:05 to 14:50
   title: Fine-Grained Dichotomies for evaluating database queries
   speaker: Nofar Carmeli
+  slides:
+    - url: /slides-carmeli.pdf
+      label: slides without pauses
   abstract: >-
     Consider the task of evaluating queries over databases. We will start by
     considering a very simple class of queries: join queries, and a simple
@@ -169,6 +172,9 @@
 - time: 15:20 to 16:05
   title: On The Fine Grained Complexity of Multi-Stack Reachability
   speaker: Michael Wehar
+  slides:
+    - url: /slides-wehar.pdf
+      label: slides without pauses
   abstract: >-
     Determining whether there exists a string that is accepted by a given
     pushdown automaton (PDA) is referred to as the non-emptiness problem for
