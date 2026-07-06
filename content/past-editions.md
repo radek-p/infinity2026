@@ -2,6 +2,7 @@
 title: "Past editions"
 ---
 
+- [Infinity 2026](https://infinity2026.pages.dev), Egham, UK with ICALP
 - [Infinity 2023](https://infinity-2023.github.io/), Antwerp, Belgium with CONCUR
 - [Infinity 2020](https://web.archive.org/web/20210816093437/https://infinity.mpi-sws.org/), Online with LICS and ICALP
 - [Infinity 2019](http://atva2019.iis.sinica.edu.tw/infinity2019/), Taipei, Taiwan with ATVA
