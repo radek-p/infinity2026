@@ -27,6 +27,9 @@
 - time: 10:30 to 11:15
   title: Precise Complexity Analysis of Coverability in Vector Addition Systems
   speaker: Henry Sinclair-Banks
+  slides:
+    - url: /slides-sinclair-banks-pauses.pdf
+      label: slides with pauses
   abstract: >-
     Coverability in Vector Addition Systems with States (VASS) is a well-known,
     well-studied, fundamental problem for infinite-state systems. In short, VASS

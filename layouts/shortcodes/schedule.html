@@ -20,23 +20,22 @@
           <div class="schedule__title">{{ with $entry.link }}<a href="{{ . }}">{{ $entry.title }}</a>{{ else }}{{ $entry.title }}{{ end }}</div>
           <ul class="schedule__items">
             {{- range .items -}}
+              {{- $item := . -}}
               <li>
-                <div class="schedule__title">{{ .title }}</div>
-                {{- with .speaker }}<div class="schedule__speaker">{{ . }}</div>{{ end -}}
-                {{- with .slides }}<div class="schedule__slides">{{- range . }}<a href="{{ .url }}" class="schedule__slides-link">{{ .label }}</a>{{ end -}}</div>{{ end -}}
-                {{- with .abstract }}{{ if ne . "TBA" }}
-                  <details class="schedule__abstract"><summary>Abstract</summary>{{ partial "schedule-abstract.html" . }}</details>
-                {{- end }}{{ end -}}
+                <div class="schedule__title">{{ $item.title }}</div>
+                {{- with $item.speaker }}<div class="schedule__speaker">{{ . }}</div>{{ end -}}
+                {{- if or $item.slides (and $item.abstract (ne $item.abstract "TBA")) -}}
+                <div class="schedule__meta-row">{{- with $item.slides }}<div class="schedule__slides">{{- range . }}<a href="{{ .url }}" class="schedule__slides-link">{{ .label }}</a>{{ end -}}</div>{{ end -}}{{- with $item.abstract }}{{ if ne . "TBA" }}<details class="schedule__abstract"><summary>Abstract</summary>{{ partial "schedule-abstract.html" . }}</details>{{- end }}{{ end -}}</div>
+                {{- end -}}
               </li>
             {{- end -}}
           </ul>
         {{- else -}}
           <div class="schedule__title">{{ with .link }}<a href="{{ . }}">{{ $entry.title }}</a>{{ else }}{{ $entry.title }}{{ end }}</div>
           {{- with .speaker }}<div class="schedule__speaker">{{ . }}</div>{{ end -}}
-          {{- with .slides }}<div class="schedule__slides">{{- range . }}<a href="{{ .url }}" class="schedule__slides-link">{{ .label }}</a>{{ end -}}</div>{{ end -}}
-          {{- with .abstract }}{{ if ne . "TBA" }}
-            <details class="schedule__abstract"><summary>Abstract</summary>{{ partial "schedule-abstract.html" . }}</details>
-          {{- end }}{{ end -}}
+          {{- if or .slides (and .abstract (ne .abstract "TBA")) -}}
+          <div class="schedule__meta-row">{{- with .slides }}<div class="schedule__slides">{{- range . }}<a href="{{ .url }}" class="schedule__slides-link">{{ .label }}</a>{{ end -}}</div>{{ end -}}{{- with .abstract }}{{ if ne . "TBA" }}<details class="schedule__abstract"><summary>Abstract</summary>{{ partial "schedule-abstract.html" . }}</details>{{- end }}{{ end -}}</div>
+          {{- end -}}
         {{- end -}}
       </div>
     </div>
@@ -86,27 +85,41 @@
 .schedule__items > li::marker {
   color: var(--accent);
 }
+.schedule__meta-row {
+  margin-top: 0.3em;
+  overflow: hidden;
+}
 .schedule__slides {
-  margin-top: 0.2em;
+  float: right;
   display: flex;
   flex-wrap: wrap;
   gap: 0.6em;
+  line-height: 1;
+  margin-bottom: 0.4em;
+  padding-bottom: 0.25em;
 }
 .schedule__slides-link {
   font-size: 0.9em;
   opacity: 0.8;
 }
-.schedule__abstract {
-  margin-top: 0.3em;
-}
+
 .schedule__abstract > summary {
+  display: block;
+  float: left;
   cursor: pointer;
   color: var(--accent);
   opacity: 0.8;
   font-size: 0.9em;
+  list-style: none;
+  line-height: 1;
+  padding-bottom: 0.25em;
 }
+.schedule__abstract > summary::-webkit-details-marker { display: none; }
+.schedule__abstract > summary::before { content: '▶\00a0'; }
+details[open].schedule__abstract > summary::before { content: '▼\00a0'; }
 .schedule__abstract-body {
-  margin-top: 0.4em;
+  clear: both;
+  padding-top: 0.4em;
   opacity: 0.9;
 }
 .schedule__abstract-body > p {
