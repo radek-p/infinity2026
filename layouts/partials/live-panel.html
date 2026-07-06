@@ -46,7 +46,6 @@
 <style>
 .live-panel {
   background: var(--background);
-  border-bottom: 1px solid var(--accent);
   font-size: 1.05rem;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
@@ -58,6 +57,8 @@
 .live-panel__inner {
   max-width: 864px;
   padding: 0 40px;
+  border-right: 1px solid var(--accent);
+  border-bottom: 1px solid var(--accent);
 }
 
 .live-panel__section-heading {
@@ -181,6 +182,10 @@
 }
 
 @media (max-width: 684px) {
+  .live-panel__inner,
+  .container {
+    border-right: none;
+  }
   .live-panel__inner {
     padding: 0 20px;
   }
