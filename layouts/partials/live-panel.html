@@ -3,7 +3,7 @@
   <div class="live-panel__inner">
     <div class="live-panel__section-heading">
       <span>Happening now</span>
-      <span class="live-panel__heading-right" data-panel="clock"></span>
+      <span class="live-panel__heading-right"><span data-panel="clock-h"></span><span class="live-panel__colon">:</span><span data-panel="clock-m"></span></span>
     </div>
 
     <div class="live-panel__block" data-panel-row="now">
@@ -71,9 +71,12 @@
   color: var(--accent);
 }
 
-.live-panel__section-heading .live-panel__heading-right, .live-panel__section-heading .live-panel__heading-right a {
+.live-panel__section-heading .live-panel__heading-right,
+.live-panel__section-heading .live-panel__heading-right a {
   font-weight: normal;
   color: var(--foreground);
+}
+.live-panel__section-heading .live-panel__heading-right {
   opacity: 50%;
 }
 
@@ -102,7 +105,7 @@
 }
 .live-panel__label--now {
   color: var(--accent);
-  animation: live-panel-blink 1.8s ease-in-out infinite;
+  animation: live-panel-blink 2s ease-in-out infinite;
 }
 .live-panel__label--next {
   color: var(--foreground);
@@ -111,6 +114,13 @@
 @keyframes live-panel-blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.35; }
+}
+@keyframes colon-fade {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.live-panel__colon {
+  animation: colon-fade 2s ease-in-out infinite;
 }
 
 .live-panel__meta {
@@ -214,7 +224,8 @@ if (!window.__livePanelInit) {
       }
       panel.hidden = false;
 
-      panel.querySelector('[data-panel="clock"]').textContent = pad2(d.getHours()) + ':' + pad2(d.getMinutes());
+      panel.querySelector('[data-panel="clock-h"]').textContent = pad2(d.getHours());
+      panel.querySelector('[data-panel="clock-m"]').textContent = pad2(d.getMinutes());
 
       var result = L.findNowAndNext(d);
 
@@ -243,8 +254,16 @@ if (!window.__livePanelInit) {
       }
     }
 
-    update();
-    setInterval(update, 20000);
+    var lastMinute = -1;
+    function tick() {
+      var m = window.InfinityLive.now().getMinutes();
+      if (m === lastMinute) return;
+      lastMinute = m;
+      update();
+    }
+
+    tick();
+    setInterval(tick, 1000);
   });
 }
 </script>
