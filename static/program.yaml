@@ -28,6 +28,8 @@
   title: Precise Complexity Analysis of Coverability in Vector Addition Systems
   speaker: Henry Sinclair-Banks
   slides:
+    - url: /slides-sinclair-banks.pdf
+      label: slides without pauses
     - url: /slides-sinclair-banks-pauses.pdf
       label: slides with pauses
   abstract: >-
