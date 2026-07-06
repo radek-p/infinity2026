@@ -148,6 +148,11 @@ details[open].schedule__abstract > summary::before { content: '▼\00a0'; }
 .schedule__row--break.schedule__row--now .schedule__title {
   opacity: 1;
 }
+@media (max-width: 684px) {
+  .schedule__slides {
+    float: none;
+  }
+}
 </style>
 <script>
 if (!window.__scheduleNowInit) {
