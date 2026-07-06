@@ -11,30 +11,58 @@ document.addEventListener("DOMContentLoaded", function() {
     const incrementButton = document.getElementById('increment-button');
     const apiEndpoint = 'https://infinity-2026-counter.radek25c-cloudflare.workers.dev';
 
-    const WORKSHOP_DATE = new Date('2026-07-06T00:00:00Z');
+    // Key moments on the workshop day, in London time (BST = UTC+1 on 2026-07-06).
+    const START_INFINITY = new Date('2026-07-06T09:05:00+01:00'); // workshop begins
+    const START_OMEGA    = new Date('2026-07-06T17:55:00+01:00'); // last talk ends
 
-    function isWorkshopDay() {
+    let latestCount = 0; // most recent value we know from the API
+
+    // Three phases:
+    //   "counting"  -> value / ∞   (button: increment towards infinity)
+    //   "infinity"  -> ∞ / ∞       (no button; we've reached it)
+    //   "omega"     -> ω + value   (button: keep going, past infinity)
+    // ω is the first transfinite ordinal, so ω + n (n finite) is a genuine
+    // ordinal strictly greater than ω — i.e. literally counting past infinity.
+    function phase() {
         const now = new Date();
-        return now.getUTCFullYear() === WORKSHOP_DATE.getUTCFullYear() &&
-               now.getUTCMonth() === WORKSHOP_DATE.getUTCMonth() &&
-               now.getUTCDate() === WORKSHOP_DATE.getUTCDate();
+        if (now >= START_OMEGA) return 'omega';
+        if (now >= START_INFINITY) return 'infinity';
+        return 'counting';
     }
 
     function formatCounter(value) {
-        if (isWorkshopDay()) {
-            return '\\( \\infty / \\infty \\)';
+        switch (phase()) {
+            case 'infinity': return '\\( \\infty / \\infty \\)';
+            case 'omega':    return `\\( \\omega + ${value} \\)`;
+            default:         return `\\( ${value} / \\infty \\)`;
         }
-        return `\\( ${value} / \\infty \\)`;
+    }
+
+    function applyPhaseUI() {
+        const p = phase();
+        if (p === 'infinity') {
+            incrementButton.style.display = 'none';
+        } else {
+            incrementButton.style.display = '';
+            incrementButton.textContent =
+                (p === 'omega') ? 'Increment past Infinity' : 'Increment to Infinity';
+        }
+    }
+
+    function render(value) {
+        counterValue.innerText = formatCounter(value);
+        if (window.renderMathInElement) {
+            renderMathInElement(counterValue);
+        }
     }
 
     async function fetchCounter() {
+        applyPhaseUI();
         try {
             const response = await fetch(apiEndpoint);
             const data = await response.json();
-            counterValue.innerText = formatCounter(data.count);
-            if (window.renderMathInElement) {
-                renderMathInElement(counterValue);
-            }
+            latestCount = data.count;
+            render(latestCount);
         } catch (error) {
             console.error('Failed to fetch counter:', error);
         }
@@ -45,10 +73,8 @@ document.addEventListener("DOMContentLoaded", function() {
         try {
             const response = await fetch(apiEndpoint, { method: 'POST' });
             const data = await response.json();
-            counterValue.innerText = formatCounter(data.count);
-            if (window.renderMathInElement) {
-                renderMathInElement(counterValue);
-            }
+            latestCount = data.count;
+            render(latestCount);
         } catch (error) {
             console.error('Failed to increment counter:', error);
         } finally {
@@ -58,7 +84,26 @@ document.addEventListener("DOMContentLoaded", function() {
 
     incrementButton.addEventListener('click', incrementCounter);
 
-    // Initial fetch
+    // Re-check the phase on an already-open page, so the footer flips to
+    // ∞ / ∞ (and later ω + n) by itself when the time comes, with no manual
+    // refresh. The check is local and cheap; we only touch the network at the
+    // single moment we actually cross into the ω phase, not on every tick.
+    let lastPhase = phase();
+    const phaseTimer = setInterval(function () {
+        const p = phase();
+        if (p === lastPhase) return;
+        lastPhase = p;
+        applyPhaseUI();
+        if (p === 'omega') {
+            fetchCounter();            // refresh the count as we pass infinity
+            clearInterval(phaseTimer); // terminal phase, no more transitions
+        } else {
+            render(latestCount);
+        }
+    }, 10000);
+
+    // Initial paint + fetch
+    applyPhaseUI();
     fetchCounter();
 });
 </script>
