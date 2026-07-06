@@ -187,6 +187,9 @@
 - time: 16:15 to 17:00
   title: On the Fine-Grained Complexity of Concurrency Testing
   speaker: Andreas Pavlogiannis
+  slides:
+    - url: /slides-pavlogiannis-pauses.pdf
+      label: slides with pauses
   abstract: >-
     Concurrency is ubiquitous and comes in various forms, from multi-threading
     inside a CPU to distributed systems, databases, and the internet of things.
