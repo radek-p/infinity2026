@@ -1,42 +1,51 @@
 {{ partial "schedule-live-data.html" . }}
 <div id="livePanel" class="live-panel" hidden>
   <div class="live-panel__inner">
-    <div class="live-panel__section-heading">
-      <span>Happening now</span>
-      <span class="live-panel__heading-right"><span data-panel="clock-h"></span><span class="live-panel__colon">:</span><span data-panel="clock-m"></span></span>
+    <div id="livePanelScheduleSection">
+      <div class="live-panel__section-heading">
+        <span>Happening now</span>
+        <span class="live-panel__heading-right"><span data-panel="clock-h"></span><span class="live-panel__colon">:</span><span data-panel="clock-m"></span></span>
+      </div>
+
+      <div class="live-panel__block" data-panel-row="now">
+        <div class="live-panel__label live-panel__label--now">now</div>
+        <div class="live-panel__meta">
+          <span class="live-panel__time" data-panel="now-time"></span>
+          <span class="live-panel__rel" data-panel="now-rel"></span>
+        </div>
+        <div class="live-panel__title" data-panel="now-title"></div>
+        <div class="live-panel__speaker" data-panel="now-speaker"></div>
+      </div>
+      <div class="live-panel__block" data-panel-row="next">
+        <div class="live-panel__label live-panel__label--next">next</div>
+        <div class="live-panel__meta">
+          <span class="live-panel__time" data-panel="next-time"></span>
+          <span class="live-panel__rel" data-panel="next-rel"></span>
+        </div>
+        <div class="live-panel__title" data-panel="next-title"></div>
+        <div class="live-panel__speaker" data-panel="next-speaker"></div>
+      </div>
     </div>
 
-    <div class="live-panel__block" data-panel-row="now">
-      <div class="live-panel__label live-panel__label--now">now</div>
-      <div class="live-panel__meta">
-        <span class="live-panel__time" data-panel="now-time"></span>
-        <span class="live-panel__rel" data-panel="now-rel"></span>
-      </div>
-      <div class="live-panel__title" data-panel="now-title"></div>
-      <div class="live-panel__speaker" data-panel="now-speaker"></div>
-    </div>
-    <div class="live-panel__block" data-panel-row="next">
-      <div class="live-panel__label live-panel__label--next">next</div>
-      <div class="live-panel__meta">
-        <span class="live-panel__time" data-panel="next-time"></span>
-        <span class="live-panel__rel" data-panel="next-rel"></span>
-      </div>
-      <div class="live-panel__title" data-panel="next-title"></div>
-      <div class="live-panel__speaker" data-panel="next-speaker"></div>
+    <div class="live-panel__block" id="livePanelThankYou" hidden>
+      <div class="live-panel__title">Thank you for joining INFINITY 2026!</div>
+      <div class="live-panel__speaker">We hope you enjoyed the workshop and look forward to seeing you at future editions.</div>
     </div>
 
-    <div class="live-panel__section-heading">
-      <span>Venue</span>
-      <span class="live-panel__heading-right"><a href="https://intranet.royalholloway.ac.uk/students/assets/docs/pdf/rh100/the-windsor-building.pdf" target="_blank" rel="noopener">Campus map</a></span>
-    </div>
-    <div class="live-panel__block live-panel__block--map">
-      <p class="live-panel__map-caption">Room 0-02, Windsor Building</p>
-      <a class="live-panel__map" href="/windsor-map-dark.png" target="_blank" rel="noopener">
-        <img
-          src="/windsor-map-dark.png"
-          alt="Ground floor map of the Windsor Building at Royal Holloway, showing Room 0-02 (INFINITY 2026) highlighted in gold, with a white arrow marking the route from the main entrance."
-        >
-      </a>
+    <div id="livePanelVenueSection">
+      <div class="live-panel__section-heading">
+        <span>Venue</span>
+        <span class="live-panel__heading-right"><a href="https://intranet.royalholloway.ac.uk/students/assets/docs/pdf/rh100/the-windsor-building.pdf" target="_blank" rel="noopener">Campus map</a></span>
+      </div>
+      <div class="live-panel__block live-panel__block--map">
+        <p class="live-panel__map-caption">Room 0-02, Windsor Building</p>
+        <a class="live-panel__map" href="/windsor-map-dark.png" target="_blank" rel="noopener">
+          <img
+            src="/windsor-map-dark.png"
+            alt="Ground floor map of the Windsor Building at Royal Holloway, showing Room 0-02 (INFINITY 2026) highlighted in gold, with a white arrow marking the route from the main entrance."
+          >
+        </a>
+      </div>
     </div>
 
     <p class="live-panel__debug" data-panel="debug" hidden></p>
@@ -228,6 +237,13 @@ if (!window.__livePanelInit) {
         return;
       }
       panel.hidden = false;
+
+      var thankYou = d >= L.THANK_YOU_START;
+      document.getElementById('livePanelThankYou').hidden = !thankYou;
+      document.getElementById('livePanelScheduleSection').hidden = thankYou;
+      document.getElementById('livePanelVenueSection').hidden = thankYou;
+
+      if (thankYou) return;
 
       panel.querySelector('[data-panel="clock-h"]').textContent = pad2(d.getHours());
       panel.querySelector('[data-panel="clock-m"]').textContent = pad2(d.getMinutes());

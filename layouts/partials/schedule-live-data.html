@@ -8,7 +8,8 @@ if (!window.InfinityLive) {
     // it as lasting 2 hours from its 19:30 start, i.e. until 21:30 — without
     // adding that end time to the actual programme data.
     var PANEL_START = new Date('2026-07-05T23:15:00');
-    var PANEL_END = new Date('2026-07-06T21:30:00');
+    var THANK_YOU_START = new Date('2026-07-06T21:30:00');
+    var PANEL_END = new Date('2026-07-13T00:00:00');
 
     // Testing aid: set window.__scheduleDebugNow (browser console, no system
     // clock change needed) to any Date-parseable string, e.g.
@@ -98,6 +99,7 @@ if (!window.InfinityLive) {
       findNowAndNext: findNowAndNext,
       formatDuration: formatDuration,
       PANEL_START: PANEL_START,
+      THANK_YOU_START: THANK_YOU_START,
       PANEL_END: PANEL_END
     };
   })();
