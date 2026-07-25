@@ -32,6 +32,8 @@
       label: slides without pauses
     - url: /slides-sinclair-banks-pauses.pdf
       label: slides with pauses
+    - url: https://www.youtube.com/watch?v=7Hf4WIU_NXo
+      label: video recording
   abstract: >-
     Coverability in Vector Addition Systems with States (VASS) is a well-known,
     well-studied, fundamental problem for infinite-state systems. In short, VASS
